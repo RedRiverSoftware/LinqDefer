@@ -1,5 +1,4 @@
 # LinqDefer
-Description
 LinqDefer is a .NET library which extends LINQ query handling for data access, allowing for expressions not otherwise supported by the provider.  For example, it allows you to use methods and expressions which would not otherwise be supported by Entity Framework:
 
     context.People
