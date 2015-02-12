@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>LinqDefer</id>
+    <version>$version$</version>
+    <title>LinqDefer</title>
+    <authors>Red River Software</authors>
+    <owners>Red River Software</owners>
+    <projectUrl>https://github.com/RedRiverSoftware/LinqDefer</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library which extends LINQ query handling for data access, allowing for expressions not otherwise supported by the provider</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2015, Red River Software</copyright>
+    <tags>linq linqdefer</tags>
+  </metadata>
+</package>

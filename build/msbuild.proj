@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OutputPath>../BuildOutput</OutputPath>
+    <ModifiedLibrarySourcePath>../BuildTemp</ModifiedLibrarySourcePath>
+    <Version>1.0.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <LibrarySource Include="../LinqDefer/**/*"/>
+  </ItemGroup>
+  <Target Name="PreBuild">
+    <Delete Files="$(OutputPath)/**/*"/>
+    <RemoveDir Directories="$(OutputPath)"/>
+    <MakeDir Directories="$(OutputPath)"/>
+
+    <Delete Files="$(ModifiedLibrarySourcePath)/**/*"/>
+    <RemoveDir Directories="$(ModifiedLibrarySourcePath)"/>
+    <Copy SourceFiles="@(LibrarySource)" DestinationFiles="@(LibrarySource->'$(ModifiedLibrarySourcePath)/%(RecursiveDir)%(Filename)%(Extension)')"/>
+    <ReplaceFileText InputFilename="$(ModifiedLibrarySourcePath)/Properties/AssemblyInfo.cs" OutputFilename="$(ModifiedLibrarySourcePath)/Properties/AssemblyInfo.cs"
+                     MatchExpression="\[assembly: AssemblyVersion\(.*\)\]" ReplacementText="[assembly: AssemblyVersion(&quot;$(Version)&quot;)]"/>
+  </Target>
+  <Target Name="BuildLibrary">
+    <!--build to /library then move to /lib since /lib is cleaned by IncrementalClean-->
+    <MSBuild Projects="$(ModifiedLibrarySourcePath)/LinqDefer.csproj" Targets="Build" Properties="OutputPath=$(OutputPath)/library/net45"/>
+    <Exec Command="move $(OutputPath)/library $(OutputPath)/lib"/>
+  </Target>
+  <Target Name="BuildTests">
+    <MSBuild Projects="../LinqDefer.Tests/LinqDefer.Tests.csproj" Targets="Build" Properties="OutputPath=$(OutputPath)/tests"/>
+  </Target>
+  <Target Name="BuildSample">
+    <MSBuild Projects="../LinqDefer.Sample/LinqDefer.Sample.csproj" Targets="Build" Properties="OutputPath=$(OutputPath)/sample"/>
+  </Target>
+  <Target Name="Build" DependsOnTargets="PreBuild; BuildLibrary; BuildTests; BuildSample">
+  </Target>
+  <Target Name="PrepPublish">
+    <Copy SourceFiles="LinqDefer.nuspec" DestinationFolder="$(OutputPath)"/>
+    <Copy SourceFiles="../LinqDefer/LinqDefer.csproj" DestinationFolder="$(OutputPath)"/>
+  </Target>
+  <Target Name="Publish" DependsOnTargets="Build; PrepPublish">
+    <ReplaceFileText InputFilename="$(OutputPath)/LinqDefer.nuspec" OutputFilename="$(OutputPath)/LinqDefer.nuspec"
+                     MatchExpression="\$version\$" ReplacementText="$(Version)" />
+    <MakeDir Directories="$(OutputPath)/package"/>
+    <Exec Command="nuget pack $(OutputPath)/LinqDefer.nuspec -OutputDirectory $(OutputPath)/package" />
+    <Delete Files="$(ModifiedLibrarySourcePath)/**/*"/>
+    <RemoveDir Directories="$(ModifiedLibrarySourcePath)"/>
+    <Delete Files="$(OutputPath)/LinqDefer.nuspec"/>
+    <Delete Files="$(OutputPath)/LinqDefer.csproj"/>
+  </Target>
+
+  <UsingTask TaskName="ReplaceFileText" TaskFactory="CodeTaskFactory" AssemblyFile="$(windir)\Microsoft.NET\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <InputFilename ParameterType="System.String" Required="true" />
+      <OutputFilename ParameterType="System.String" Required="true" />
+      <MatchExpression ParameterType="System.String" Required="true" />
+      <ReplacementText ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            File.WriteAllText(
+                OutputFilename,
+                Regex.Replace(File.ReadAllText(InputFilename), MatchExpression, ReplacementText)
+                );
+          ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>

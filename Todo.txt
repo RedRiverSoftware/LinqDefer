@@ -1,0 +1,35 @@
+
+In Progress
+===========
+
+To do
+=====
+* Build process including NuGet
+* CI, markers for GitHub
+* Markdown pages
+
+Backlog
+=======
+* Create EfSupportedAutoAnalyser based on checking supported functionality in EntityFramework
+
+Done
+====
+* Create proof-of-concept prototype
+* Rework prototype code into neater, distinct solution
+* Refactor to separate expression analysis from replacement engine
+ - Creation of interfaces, types
+ - Remove existing VisitParameter-based identification logic
+ - Add calls to analyser as appropriate in Visit() method
+* Create DataAccessOnlyAnalyser based on only member-access expressions being passed on
+* Concept of configuration classes (or global static configuration)
+* Create unit tests
+* Create unit tests to 100% code coverage
+* Implement Execute and Execute<T> on DeferProvider (throws NIE)
+* Commenting all public types/members
+* Credit any third-party helper code
+* Create functional tests
+ - Simple object composition
+ - AutoMapper's ProjectTo
+* Investigate appropriate open source license, approach for third-party code
+* Label each source file correctly
+* Create sample app

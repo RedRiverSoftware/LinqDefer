@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqDefer", "LinqDefer\LinqDefer.csproj", "{85BF4CA3-767D-4536-B946-C90A93511766}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqDefer.Tests", "LinqDefer.Tests\LinqDefer.Tests.csproj", "{41D62492-E694-4E87-86FB-A60EC97C127C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC7BC862-C58E-46E8-9ECB-AAAEEBB7B7B5}"
+	ProjectSection(SolutionItems) = preProject
+		build.cmd = build.cmd
+		Todo.txt = Todo.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqDefer.Sample", "LinqDefer.Sample\LinqDefer.Sample.csproj", "{CF4F5C2A-1256-4F05-B39E-EF3E188E6838}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{E527A085-28CB-485F-9847-F2015454DAE3}"
+	ProjectSection(SolutionItems) = preProject
+		build\LinqDefer.nuspec = build\LinqDefer.nuspec
+		build\msbuild.proj = build\msbuild.proj
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85BF4CA3-767D-4536-B946-C90A93511766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85BF4CA3-767D-4536-B946-C90A93511766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85BF4CA3-767D-4536-B946-C90A93511766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85BF4CA3-767D-4536-B946-C90A93511766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D62492-E694-4E87-86FB-A60EC97C127C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D62492-E694-4E87-86FB-A60EC97C127C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D62492-E694-4E87-86FB-A60EC97C127C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D62492-E694-4E87-86FB-A60EC97C127C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF4F5C2A-1256-4F05-B39E-EF3E188E6838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4F5C2A-1256-4F05-B39E-EF3E188E6838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4F5C2A-1256-4F05-B39E-EF3E188E6838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4F5C2A-1256-4F05-B39E-EF3E188E6838}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
