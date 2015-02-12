@@ -11,7 +11,7 @@ Simply put, it is a solution to the exception, "**LINQ to Entities does not reco
 
 LinqDefer is available as a NuGet package: can be installed using the following in the Package Manager Console in Visual Studio:
 
-``Install-Package LinqDefer``
+    Install-Package LinqDefer
 
 Features
 --
