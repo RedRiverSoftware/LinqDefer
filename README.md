@@ -35,10 +35,10 @@ LinqDefer works by intercepting expressions, modifying and simplifying them and 
 
 Currently, the only implemented expression analyser is `DataAccessOnlyAnalyser`.  This will pass simple data-access expressions, such as the examples below, to the underlying provider.  All other parts of the expression are evaluated after the results are received.
 
-* Direct access of an object: `Select(p => p)`
-* Accessing a member of the object: `Select(p => p.Name)`
-* Calling a method of the object: `Select(p => p.Name.ToUpper())` - note, extension methods are not passed down, but are deferred
-* Accessing an array index: `Select(p => p[0])`
+* Direct access of an object: `p => p`
+* Accessing a member of the object: `p => p.Name`
+* Calling a method of the object: `p => p.Name.ToUpper()` - note, extension methods are not passed down, but are deferred
+* Accessing an array index: `p => p[0]`
 
 These checks are performed recusively, for example, `Select(p => p.Owner.Name.ToUpper()[0])` would be passed in its entirety to the underlying provider.
 
@@ -54,6 +54,10 @@ In other words, the following:
         .Select(p => new { f0 = p.LastName.ToUpper(), f1 = p.FirstName }) // retrieve required data
         .ToList()                                                         // materialise: runs the query
         .Select(t => string.Format("{0}, {1}", t.f0, t.f1))               // run any deferred expressions
+
+This extends to all kinds of expressions: new objects, arrays, method calls, unary and binary operators.
+
+This means there is no need to query the database to produce an intermediate object, then construct another object immediately afterwards.
 
 Sample app
 --
