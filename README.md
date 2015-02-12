@@ -19,3 +19,8 @@ Features
 * Unit tests with 100% code coverage on key classes
 * Designed to work with *Entity Framework*, but not specifically - integrates with LINQ
 * Designed to work with *AutoMapper* and the `Project().To<>()` extension
+
+Building
+--
+A Visual Studio solution file is included, but you can also build from the commandline using:
+    ./build Debug|Release 1.0.0.0
